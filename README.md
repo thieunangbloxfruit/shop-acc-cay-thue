@@ -1,2 +1,381 @@
 # shop-acc-cay-thue
 shop cày thuê uy tín
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Dịch Vụ Cày Thuê Blox Fruits & Nạp Card</title>
+    <style>
+        /* Reset & base */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #121212;
+            color: #eee;
+            line-height: 1.6;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        header {
+            width: 100%;
+            background: linear-gradient(90deg, #f2a900, #d18e00);
+            color: #121212;
+            padding: 24px 0;
+            text-align: center;
+            font-weight: 700;
+            font-size: 2.25rem;
+            letter-spacing: 3px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.6);
+        }
+        main {
+            max-width: 900px;
+            background: #1e1e1e;
+            border-radius: 16px;
+            margin: 24px 16px 48px;
+            padding: 24px 32px;
+            box-shadow: 0 10px 30px #f2a900aa;
+            width: 100%;
+        }
+        h1, h2, h3 {
+            margin-top: 0;
+            color: #f2a900;
+            text-shadow: 0 0 6px #f2a900bb;
+        }
+        .section {
+            margin-bottom: 36px;
+        }
+        .service, .recharge {
+            background: #2c2c2c;
+            padding: 20px 24px;
+            border-radius: 12px;
+            box-shadow: 0 2px 10px #000000bb;
+        }
+        .service p, .recharge p {
+            margin: 0.5rem 0;
+            font-size: 1rem;
+            color: #ccc;
+        }
+        .price {
+            font-weight: 700;
+            color: #d18e00;
+            margin-left: 8px;
+            font-size: 1.1rem;
+        }
+        /* Form Styles for Recharge section */
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+            margin-top: 12px;
+        }
+        label {
+            font-weight: 600;
+            font-size: 1rem;
+            color: #f2a900;
+            user-select: none;
+        }
+        select, input[type="text"] {
+            padding: 10px 12px;
+            font-size: 1rem;
+            border-radius: 8px;
+            border: none;
+            outline: none;
+            background: #121212;
+            color: #eee;
+            box-shadow: inset 0 0 5px #000000bb;
+            transition: box-shadow 0.3s ease;
+        }
+        select:focus, input[type="text"]:focus {
+            box-shadow: 0 0 8px #f2a900ee;
+        }
+        button {
+            background: linear-gradient(90deg, #f2a900, #d18e00);
+            border: none;
+            color: #121212;
+            font-weight: 700;
+            font-size: 1.1rem;
+            padding: 12px;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: background 0.3s ease;
+            box-shadow: 0 4px 10px #f2a900cc;
+        }
+        button:hover {
+            background: #d18e00;
+            box-shadow: 0 6px 15px #d18e00cc;
+        }
+        /* Responsive table */
+        .service-list {
+            margin-top: 12px;
+        }
+        .service-list p {
+            margin: 6px 0;
+        }
+        /* Modal */
+        .modal-bg {
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(0,0,0,0.85);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            padding: 16px;
+            box-sizing: border-box;
+        }
+        .modal-content {
+            background: #2b2b2b;
+            border-radius: 16px;
+            padding: 28px 32px;
+            max-width: 420px;
+            width: 100%;
+            box-shadow: 0 10px 25px #f2a900cc;
+            text-align: center;
+            color: #eee;
+            user-select: none;
+            box-sizing: border-box;
+        }
+        .modal-content h2 {
+            margin-top: 0;
+            color: #f2a900;
+            font-size: 1.8rem;
+            text-shadow: 0 0 6px #f2a900bb;
+        }
+        .modal-content p {
+            font-size: 1.1rem;
+            margin: 16px 0 8px 0;
+            line-height: 1.4;
+        }
+        .modal-content p strong {
+            color: #ffd54f;
+        }
+        .modal-content .info-row {
+            margin: 8px 0;
+            padding: 8px 12px;
+            background: #444444aa;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 1rem;
+            letter-spacing: 0.03em;
+            user-select: text;
+            word-break: break-all;
+        }
+        .modal-content button {
+            margin-top: 20px;
+            background: #f2a900;
+            border-radius: 8px;
+            padding: 12px 28px;
+            font-weight: 700;
+            font-size: 1.1rem;
+            color: #121212;
+            box-shadow: 0 4px 10px #f2a900cc;
+            cursor: pointer;
+            border: none;
+            transition: background 0.3s ease;
+        }
+        .modal-content button:hover {
+            background: #d18e00;
+        }
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 18px 0;
+            background: #121212;
+            color: #777;
+            font-size: 0.9rem;
+            margin-top: auto;
+            width: 100%;
+            user-select: none;
+        }
+        @media (max-width: 600px) {
+            main {
+                padding: 16px 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        DỊCH VỤ CÀY THUÊ BLOX FRUITS & NẠP CARD
+    </header>
+    <main>
+        <section class="section service-section">
+            <h2>Các Dịch Vụ Cày Thuê</h2>
+            <div class="service">
+                <h3>Cày Thuê Blox Fruit (Cân GDTG)</h3>
+                <p>Chúng tôi cung cấp dịch vụ cày thuê Blox Fruits với các gói dịch vụ đa dạng và uy tín.</p>
+            </div>
+            <div class="service">
+                <h3>Cày Beli</h3>
+                <p><span class="price">15K:</span> 15M Beli</p>
+                <p><span class="price">25K:</span> 30M Beli</p>
+            </div>
+            <div class="service">
+                <h3>Cày Mastery</h3>
+                <p><span class="price">15K:</span> Full Mastery 2 cây kiếm hoặc melee</p>
+                <p><span class="price">15K:</span> Full chiêu 2 cây súng</p>
+            </div>
+            <div class="service">
+                <h3>Cày Điểm Tím (Fragments)</h3>
+                <p><span class="price">15K:</span> 15K Điểm Tím</p>
+                <p><span class="price">25K:</span> 30K Điểm Tím</p>
+            </div>
+            <div class="service">
+                <h3>Lấy Item</h3>
+                <p><span class="price">12K:</span> Dragon Storm</p>
+                <p><span class="price">10K:</span> Dragon Heart</p>
+                <p><span class="price">24K:</span> Lấy 8 đai</p>
+                <p><span class="price">12K:</span> Cày Mastery Dragon Storm và Dragon Heart, và các item kiếm súng khác.</p>
+            </div>
+            <div class="service">
+                <h3>Thông Tin Khác</h3>
+                <p>Chúng tôi cày vừa hack vừa chạy nên anh em yên tâm không lo bay acc ✅✅✅</p>
+                <p>Đổi lại thời gian có hơi lâu một chút.</p>
+                <p>Lưu ý: Phải đưa tiền trước, muốn bằng chứng gì đều có thể cung cấp để chứng tỏ uy tín bởi chúng tôi là YouTuber.</p>
+                <p>Hack free nhưng nếu mất acc khách, sẽ có hình thức bồi thường.</p>
+            </div>
+        </section>
+
+        <section class="section recharge-section">
+            <h2>Nạp Card</h2>
+            <div class="recharge">
+                <form id="rechargeForm" autocomplete="off" novalidate>
+                    <label for="cardType">Chọn loại thẻ:</label>
+                    <select id="cardType" name="cardType" required aria-required="true" aria-label="Chọn loại thẻ">
+                        <option value="" disabled selected>-- Chọn loại thẻ --</option>
+                        <option value="Viettel">Viettel</option>
+                        <option value="Mobifone">Mobifone</option>
+                        <option value="Vinaphone">Vinaphone</option>
+                        <option value="Vietnamobile">Vietnamobile</option>
+                        <option value="Gmobile">Gmobile</option>
+                        <option value="Gate">Gate</option>
+                        <option value="Zing">Zing</option>
+                        <option value="Vcoin">Vcoin</option>
+                    </select>
+
+                    <label for="cardCode">Nhập mã thẻ:</label>
+                    <input type="text" id="cardCode" name="cardCode" placeholder="Nhập mã thẻ ở đây" maxlength="20" minlength="8" pattern="[A-Za-z0-9]+" required aria-required="true" aria-label="Nhập mã thẻ">
+
+                    <label for="cardSerial">Nhập số seri thẻ:</label>
+                    <input type="text" id="cardSerial" name="cardSerial" placeholder="Nhập số seri thẻ ở đây" maxlength="20" minlength="6" pattern="[A-Za-z0-9]+" required aria-required="true" aria-label="Nhập số seri thẻ">
+
+                    <label for="cardValue">Chọn mệnh giá:</label>
+                    <select id="cardValue" name="cardValue" required aria-required="true" aria-label="Chọn mệnh giá thẻ">
+                        <option value="" disabled selected>-- Chọn mệnh giá --</option>
+                        <option value="10000">10,000 VND</option>
+                        <option value="20000">20,000 VND</option>
+                        <option value="50000">50,000 VND</option>
+                        <option value="100000">100,000 VND</option>
+                        <option value="200000">200,000 VND</option>
+                        <option value="500000">500,000 VND</option>
+                    </select>
+
+                    <button type="submit" aria-label="Nạp card">Nạp Card</button>
+                </form>
+            </div>
+        </section>
+    </main>
+
+    <div class="modal-bg" id="modalBg" role="dialog" aria-modal="true" aria-labelledby="modalTitle" aria-describedby="modalDesc">
+        <div class="modal-content">
+            <h2 id="modalTitle"></h2>
+            <p id="modalDesc"></p>
+            <div id="modalDetails" style="text-align:left; margin-top: 12px;">
+                <div><strong>Loại thẻ:</strong> <span id="infoCardType" class="info-row"></span></div>
+                <div><strong>Mệnh giá:</strong> <span id="infoCardValue" class="info-row"></span></div>
+                <div><strong>Mã thẻ:</strong> <span id="infoCardCode" class="info-row"></span></div>
+                <div><strong>Số seri:</strong> <span id="infoCardSerial" class="info-row"></span></div>
+            </div>
+            <button id="closeModalBtn" aria-label="Đóng cửa sổ">Đóng</button>
+        </div>
+    </div>
+
+    <footer>
+        &copy; 2024 Dịch Vụ Cày Thuê Blox Fruits & Nạp Card. Bản quyền thuộc về bạn.
+    </footer>
+
+    <script>
+        (function(){
+            const form = document.getElementById('rechargeForm');
+            const modalBg = document.getElementById('modalBg');
+            const modalTitle = document.getElementById('modalTitle');
+            const modalDesc = document.getElementById('modalDesc');
+            const modalDetails = document.getElementById('modalDetails');
+            const infoCardType = document.getElementById('infoCardType');
+            const infoCardValue = document.getElementById('infoCardValue');
+            const infoCardCode = document.getElementById('infoCardCode');
+            const infoCardSerial = document.getElementById('infoCardSerial');
+            const closeModalBtn = document.getElementById('closeModalBtn');
+
+            function showModal(title, desc, details=null) {
+                modalTitle.textContent = title;
+                modalDesc.textContent = desc;
+                if(details) {
+                    modalDetails.style.display = 'block';
+                    infoCardType.textContent = details.cardType;
+                    infoCardValue.textContent = details.cardValue.toLocaleString() + " VND";
+                    infoCardCode.textContent = details.cardCode;
+                    infoCardSerial.textContent = details.cardSerial;
+                } else {
+                    modalDetails.style.display = 'none';
+                }
+                modalBg.style.display = 'flex';
+                closeModalBtn.focus();
+            }
+
+            function closeModal() {
+                modalBg.style.display = 'none';
+                form.querySelector('[name="cardType"]').focus();
+            }
+
+            closeModalBtn.addEventListener('click', closeModal);
+            modalBg.addEventListener('click', (e) => {
+                if(e.target === modalBg) {
+                    closeModal();
+                }
+            });
+            window.addEventListener('keydown', e => {
+                if(e.key === 'Escape' && modalBg.style.display === 'flex') {
+                    closeModal();
+                }
+            });
+
+            form.addEventListener('submit', (e) => {
+                e.preventDefault();
+
+                // Validate again just in case
+                if(!form.reportValidity()) return;
+
+                const cardType = form.cardType.value.trim();
+                const cardCode = form.cardCode.value.trim();
+                const cardSerial = form.cardSerial.value.trim();
+                const cardValueNumber = Number(form.cardValue.value);
+
+                // Fake process delay
+                showModal('Đang xử lý', 'Vui lòng đợi trong giây lát...', null);
+
+                setTimeout(() => {
+                    // Fake validation
+                    const codeValid = /^[A-Za-z0-9]{8,20}$/.test(cardCode);
+                    const serialValid = /^[A-Za-z0-9]{6,20}$/.test(cardSerial);
+                    if(codeValid && serialValid) {
+                        showModal('Nạp Card Thành Công!', 'Cảm ơn bạn đã sử dụng dịch vụ.', {
+                            cardType: cardType,
+                            cardValue: cardValueNumber,
+                            cardCode: cardCode,
+                            cardSerial: cardSerial
+                        });
+                        form.reset();
+                    } else {
+                        showModal('Nạp Card Thất Bại', 'Mã thẻ hoặc số seri không hợp lệ. Vui lòng kiểm tra lại và thử lại.', null);
+                    }
+                }, 1500);
+            });
+        })();
+    </script>
+</body>
+</html>
